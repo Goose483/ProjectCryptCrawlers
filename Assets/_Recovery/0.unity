@@ -119,96 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &442293049
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 442293050}
-  - component: {fileID: 442293051}
-  m_Layer: 0
-  m_Name: Adobe Express - file_0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &442293050
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 442293049}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.6988741, w: -0.71524477}
-  m_LocalPosition: {x: 0.013000011, y: 0.529, z: 0}
-  m_LocalScale: {x: 0.17536074, y: 0.1697801, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1807299690}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -88.673}
---- !u!212 &442293051
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 442293049}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 6630341104690361922, guid: 42b7cce2ea40dba4792e37d9884e55ad, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1.5, y: 6.86}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &464196992
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464196992}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.01, y: -2.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -412,14 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f1273ad6bf3db4c97889f0aed0c8e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  maxHP: 100
-  currentHP: 100
-  playerName: Player
-  nameText: {fileID: 0}
-  hpText: {fileID: 0}
-  hpForeground: {fileID: 0}
-  hpBackground: {fileID: 0}
-  offset: {x: 0, y: -1, z: 0}
 --- !u!114 &464196999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,10 +568,9 @@ GameObject:
   - component: {fileID: 623719295}
   - component: {fileID: 623719299}
   - component: {fileID: 623719298}
-  - component: {fileID: 623719300}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -838,26 +739,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &623719300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623719294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5f1273ad6bf3db4c97889f0aed0c8e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHP: 100
-  currentHP: 100
-  playerName: Enemy
-  nameText: {fileID: 0}
-  hpText: {fileID: 0}
-  hpForeground: {fileID: 0}
-  hpBackground: {fileID: 0}
-  offset: {x: 0, y: -1, z: 0}
 --- !u!1 &1420885099
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +764,7 @@ Transform:
   m_GameObject: {fileID: 1420885099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.508, y: 0.666, z: 0}
+  m_LocalPosition: {x: 0.03, y: 0.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -902,10 +783,9 @@ GameObject:
   - component: {fileID: 1807299691}
   - component: {fileID: 1807299693}
   - component: {fileID: 1807299692}
-  - component: {fileID: 1807299694}
   m_Layer: 0
   m_Name: Triangle
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -981,7 +861,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 442293050}
   - {fileID: 1420885100}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -997,17 +876,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d131df136391a04890123fe78dc50fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Shot: {fileID: 2114101816137876129, guid: 5f0ae689d968980468fd770e35572bf6, type: 3}
+  Shot: {fileID: 4148419330865394777, guid: 260b1f79d182f464abf51ce57a3e7f83, type: 3}
   projectileSpeed: 20
   firePoint: {fileID: 1420885100}
   fireRate: 0.5
   initialDelay: 0
-  shootSound: {fileID: 8300000, guid: 5c6288784d8954449906783621d08e9b, type: 3}
+  upwardForce: 10
+  shootSound: {fileID: 0}
   shotsPerFire: 1
-  minDistance: 2
-  rotationSpeed: 5
-  sprintSpeed: 6
-  cornerInset: 2
 --- !u!50 &1807299692
 Rigidbody2D:
   serializedVersion: 5
@@ -1081,26 +957,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1807299694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807299688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5f1273ad6bf3db4c97889f0aed0c8e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHP: 100
-  currentHP: 100
-  playerName: Enemy
-  nameText: {fileID: 0}
-  hpText: {fileID: 0}
-  hpForeground: {fileID: 0}
-  hpBackground: {fileID: 0}
-  offset: {x: 0, y: -1, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/*public class HealthBar : MonoBehaviour
+public class Health : MonoBehaviour
 {
-    public Health targetHealth;
+    public int maxHP = 100;
+    public int currentHP = 100;
     public string playerName = "Player"; // optional name to show above bar
 
     [Header("UI Elements")]
@@ -19,37 +20,51 @@ using UnityEngine.UI;
     {
         if (nameText != null)
             nameText.text = playerName;
-
         UpdateHealthUI();
     }
 
     private void Update()
     {
-        if (targetHealth != null)
+        // If you want the health bar to follow another object, add logic here
+        UpdateHealthUI();
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentHP -= amount;
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        UpdateHealthUI();
+        if (currentHP <= 0)
         {
-            // follow the player
-            transform.position = targetHealth.transform.position + offset;
-            UpdateHealthUI();
+            Die();
         }
+    }
+
+    public void Heal(int amount)
+    {
+        currentHP += amount;
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        UpdateHealthUI();
+    }
+
+    void Die()
+    {
+        // Destroy the GameObject or trigger death logic
+        Destroy(gameObject);
     }
 
     void UpdateHealthUI()
     {
-        if (hpForeground != null && hpBackground != null && targetHealth != null)
+        if (hpForeground != null && hpBackground != null)
         {
-            float ratio = (float)targetHealth.currentHP / targetHealth.maxHP;
+            float ratio = (float)currentHP / maxHP;
             ratio = Mathf.Clamp01(ratio);
-
-            // adjust foreground to show current HP
             hpForeground.fillAmount = ratio;
             hpBackground.fillAmount = 1f; // full red behind
-
-            // update HP text with ts
             if (hpText != null)
             {
-                hpText.text = targetHealth.currentHP + "/" + targetHealth.maxHP;
+                hpText.text = currentHP + "/" + maxHP;
             }
         }
     }
 }
-*/

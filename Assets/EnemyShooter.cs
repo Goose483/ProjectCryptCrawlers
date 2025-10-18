@@ -2,55 +2,111 @@ using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
 {
-   
-    public GameObject Shot; // Prefab for the enemy's projectile
+    public GameObject Shot;
     public float projectileSpeed = 20f;
     public Transform firePoint;
     public float fireRate = 0.5f;
     private float nextFireTime = 0f;
-    // Optional delay before the first automatic shot (seconds)
     public float initialDelay = 0f;
-    public float upwardForce = 5f;
     public AudioClip shootSound;
-    // Simple iteration: number of projectiles spawned each time Shoot() runs.
-    // Default 1 keeps the script behaviour the same.
     public int shotsPerFire = 1;
-    
 
-    // Update is called once per frame
+    public float minDistance = 2f;
+    public float rotationSpeed = 5f;
+    public float sprintSpeed = 6f;
+    public float cornerInset = 2f;
+
+    private Transform player;
+    private Vector3 targetCorner;
+    private bool reachedCorner = false;
+
+    void Start()
+    {
+        if (fireRate <= 0f) fireRate = 0.5f;
+        nextFireTime = Time.time + initialDelay;
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            player = playerObj.transform;
+
+        PickRandomCorner();
+    }
+
+    void PickRandomCorner()
+    {
+        Camera cam = Camera.main;
+        if (cam == null) return;
+
+        Vector3 bottomLeft = cam.ScreenToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
+        Vector3 topRight = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, cam.nearClipPlane));
+
+        Vector3[] corners = new Vector3[4];
+        corners[0] = new Vector3(bottomLeft.x + cornerInset, bottomLeft.y + cornerInset, 0);
+        corners[1] = new Vector3(bottomLeft.x + cornerInset, topRight.y - cornerInset, 0);
+        corners[2] = new Vector3(topRight.x - cornerInset, bottomLeft.y + cornerInset, 0);
+        corners[3] = new Vector3(topRight.x - cornerInset, topRight.y - cornerInset, 0);
+
+        Vector3 newCorner;
+        do
+        {
+            newCorner = corners[Random.Range(0, 4)];
+        } while (newCorner == targetCorner);
+
+        targetCorner = newCorner;
+        reachedCorner = false;
+    }
+
     void Update()
     {
-        // Automatic firing on a timer (no player input required).
-        if (Time.time >= nextFireTime)
+        if (player == null) return;
+
+        Vector2 direction = player.position - transform.position;
+        float distance = direction.magnitude;
+
+        // if player gets too close, pick a new corner
+        if (distance < minDistance && reachedCorner)
         {
-            Shoot();
+            PickRandomCorner();
+        }
+
+        // move toward target corner
+        if (!reachedCorner)
+        {
+            float step = sprintSpeed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, targetCorner, step);
+            if (Vector2.Distance(transform.position, targetCorner) < 0.1f)
+            {
+                reachedCorner = true;
+            }
+        }
+
+        // always face player
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // only shoot when stationary
+        if (reachedCorner && Time.time >= nextFireTime)
+        {
+            Vector2 fireDir = firePoint.up;
+            float angleDiff = Vector2.Angle(fireDir, direction.normalized);
+            if (angleDiff < 10f)
+            {
+                Shoot();
+            }
         }
     }
 
     void Shoot()
     {
-        // schedule next shot
         nextFireTime = Time.time + fireRate;
-        // Play the shooting sound if there is one
-        // Basic safety checks
-        if (Shot == null)
-        {
-            Debug.LogWarning("EnemyShooter: 'Shot' prefab is not assigned.");
-            return;
-        }
-
-        if (firePoint == null)
-        {
-            Debug.LogWarning("EnemyShooter: 'firePoint' transform is not assigned.");
-            return;
-        }
+        if (Shot == null || firePoint == null) return;
 
         if (shootSound != null)
         {
             AudioSource.PlayClipAtPoint(shootSound, firePoint.position);
         }
 
-        // Spawn as many projectiles as requested (default 1)
         int count = Mathf.Max(1, shotsPerFire);
         for (int i = 0; i < count; i++)
         {
@@ -59,24 +115,8 @@ public class EnemyShooter : MonoBehaviour
             if (rb2d != null)
             {
                 rb2d.gravityScale = 0;
-                rb2d.AddForce(Vector2.up * projectileSpeed, ForceMode2D.Impulse);
+                rb2d.AddForce(firePoint.up * projectileSpeed, ForceMode2D.Impulse);
             }
         }
     }
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        // Ensure fireRate is positive to avoid zero/negative spam or instant-firing
-        if (fireRate <= 0f)
-        {
-            Debug.LogWarning("EnemyShooter: 'fireRate' must be > 0. Defaulting to 0.5f.");
-            fireRate = 0.5f;
-        }
-
-        // Schedule first shot after optional initial delay
-        nextFireTime = Time.time + initialDelay;
-    }
-
 }

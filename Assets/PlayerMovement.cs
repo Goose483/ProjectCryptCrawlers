@@ -48,22 +48,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            GetComponent<Transform>().position += leftDirection;
+            move += leftDirection;
         }
             
         if (Input.GetKey(KeyCode.D))
         {
-            GetComponent<Transform>().position += rightDirection;
+            move += rightDirection;
         }
             
         if (Input.GetKey(KeyCode.W))
         {
-            GetComponent<Transform>().position += upDirection;
+            move += upDirection;
         }
             
         if (Input.GetKey(KeyCode.S))
         {
-            GetComponent<Transform>().position += downDirection;
+            move += downDirection;
         }
             
 

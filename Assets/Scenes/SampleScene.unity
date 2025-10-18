@@ -153,7 +153,7 @@ MonoBehaviour:
   rightDirection: {x: 0.02, y: 0, z: 0}
   upDirection: {x: 0, y: 0.02, z: 0}
   downDirection: {x: 0, y: -0.02, z: 0}
-  speed: 5
+  speed: 10
   enableAiming: 1
   useRotation: 1
   flipSpriteBasedOnAim: 0

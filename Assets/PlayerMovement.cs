@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         {
             move += upDirection;
         }
-            
+
         if (Input.GetKey(KeyCode.S))
         {
             move += downDirection;

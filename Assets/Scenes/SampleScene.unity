@@ -1036,10 +1036,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1807299690}
   - component: {fileID: 1807299689}
-  - component: {fileID: 1807299691}
   - component: {fileID: 1807299692}
   - component: {fileID: 1807299694}
   - component: {fileID: 1807299695}
+  - component: {fileID: 1807299696}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Enemy
@@ -1119,29 +1119,6 @@ Transform:
   - {fileID: 1420885100}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1807299691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807299688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d131df136391a04890123fe78dc50fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  Shot: {fileID: 2114101816137876129, guid: 5f0ae689d968980468fd770e35572bf6, type: 3}
-  projectileSpeed: 20
-  firePoint: {fileID: 1420885100}
-  fireRate: 0.5
-  initialDelay: 0
-  shootSound: {fileID: 8300000, guid: 5c6288784d8954449906783621d08e9b, type: 3}
-  shotsPerFire: 1
-  minDistance: 2
-  rotationSpeed: 5
-  sprintSpeed: 6
-  cornerInset: 2
 --- !u!50 &1807299692
 Rigidbody2D:
   serializedVersion: 5
@@ -1233,6 +1210,29 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
+--- !u!114 &1807299696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807299688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52403cfbe4e04344a5af02fa613fc0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shot: {fileID: 2114101816137876129, guid: 5f0ae689d968980468fd770e35572bf6, type: 3}
+  projectileSpeed: 20
+  firePoint: {fileID: 1420885100}
+  fireRate: 0.5
+  initialDelay: 0
+  shootSound: {fileID: 8300000, guid: 5c6288784d8954449906783621d08e9b, type: 3}
+  shotsPerFire: 1
+  minDistance: 2
+  rotationSpeed: 5
+  sprintSpeed: 6
+  cornerInset: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

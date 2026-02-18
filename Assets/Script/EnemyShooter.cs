@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemyShooter : MonoBehaviour
 {
@@ -31,30 +32,35 @@ public class EnemyShooter : MonoBehaviour
 
         PickRandomCorner();
     }
-
     void PickRandomCorner()
+{
+    Camera cam = Camera.main;
+    if (cam == null) return;
+
+    // Use a fixed Z distance if in 2D to ensure ScreenToWorldPoint works correctly
+    float zDistance = 10f; 
+    Vector3 bottomLeft = cam.ScreenToWorldPoint(new Vector3(0, 0, zDistance));
+    Vector3 topRight = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, zDistance));
+
+    List<Vector3> corners = new List<Vector3>
     {
-        Camera cam = Camera.main;
-        if (cam == null) return;
+        new Vector3(bottomLeft.x + cornerInset, bottomLeft.y + cornerInset, 0), // Use commas here
+        new Vector3(bottomLeft.x + cornerInset, topRight.y - cornerInset, 0),
+        new Vector3(topRight.x - cornerInset, bottomLeft.y + cornerInset, 0),
+        new Vector3(topRight.x - cornerInset, topRight.y - cornerInset, 0)
+    };
 
-        Vector3 bottomLeft = cam.ScreenToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
-        Vector3 topRight = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, cam.nearClipPlane));
+    Vector3 newCorner;
+    int safetyNet = 0; // Prevent infinite loops
+    do
+    {
+        newCorner = corners[Random.Range(0, corners.Count)];
+        safetyNet++;
+    } while (newCorner == targetCorner && safetyNet < 10);
 
-        Vector3[] corners = new Vector3[4];
-        corners[0] = new Vector3(bottomLeft.x + cornerInset, bottomLeft.y + cornerInset, 0);
-        corners[1] = new Vector3(bottomLeft.x + cornerInset, topRight.y - cornerInset, 0);
-        corners[2] = new Vector3(topRight.x - cornerInset, bottomLeft.y + cornerInset, 0);
-        corners[3] = new Vector3(topRight.x - cornerInset, topRight.y - cornerInset, 0);
-
-        Vector3 newCorner;
-        do
-        {
-            newCorner = corners[Random.Range(0, 4)];
-        } while (newCorner == targetCorner);
-
-        targetCorner = newCorner;
-        reachedCorner = false;
-    }
+    targetCorner = newCorner;
+    reachedCorner = false;
+}
 
     void Update()
     {

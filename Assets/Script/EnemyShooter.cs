@@ -32,31 +32,32 @@ public class EnemyShooter : MonoBehaviour
 
         PickRandomCorner();
     }
-    void PickRandomCorner()
+    void PickRandomCorner(float inset)
 {
     Camera cam = Camera.main;
     if (cam == null) return;
 
-    // Use a fixed Z distance if in 2D to ensure ScreenToWorldPoint works correctly
     float zDistance = 10f; 
     Vector3 bottomLeft = cam.ScreenToWorldPoint(new Vector3(0, 0, zDistance));
     Vector3 topRight = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, zDistance));
 
     List<Vector3> corners = new List<Vector3>
     {
-        new Vector3(bottomLeft.x + cornerInset, bottomLeft.y + cornerInset, 0), // Use commas here
-        new Vector3(bottomLeft.x + cornerInset, topRight.y - cornerInset, 0),
-        new Vector3(topRight.x - cornerInset, bottomLeft.y + cornerInset, 0),
-        new Vector3(topRight.x - cornerInset, topRight.y - cornerInset, 0)
+        new Vector3(bottomLeft.x + inset, bottomLeft.y + inset, 0),
+        new Vector3(bottomLeft.x + inset, topRight.y - inset, 0),
+        new Vector3(topRight.x - inset, bottomLeft.y + inset, 0),
+        new Vector3(topRight.x - inset, topRight.y - inset, 0)
     };
 
-    Vector3 newCorner;
-    int safetyNet = 0; // Prevent infinite loops
-    do
+    Vector3 newCorner = targetCorner;
+    int maxAttempts = 10;
+
+    for (int attempt = 0; attempt < maxAttempts; attempt++)
     {
         newCorner = corners[Random.Range(0, corners.Count)];
-        safetyNet++;
-    } while (newCorner == targetCorner && safetyNet < 10);
+        if (newCorner != targetCorner)
+            break;
+    }
 
     targetCorner = newCorner;
     reachedCorner = false;
